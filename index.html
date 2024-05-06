@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>RSA Encryption Tools</title>
+      <link rel="stylesheet" href="./assets/css/output.css" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap"
+         rel="stylesheet" />
+   </head>
+
+   <body class="relative font-sans text-ebonyBlack">
+      <div class="w-full min-h-screen" id="content">
+         <header
+            class="w-full min-h-[110px] px-10 bg-snowWhite border-b-[3px] border-ebonyBlack flex items-center justify-center">
+            <nav class="w-fit min-h-fit text-center">
+               <h1 class="font-extrabold text-[2.3rem]">
+                  <span class="text-mainAccent">RSA</span> Encryption & Decryption Tools
+               </h1>
+            </nav>
+         </header>
+         <main class="w-full py-10 px-10 bg-bg min-h-full">
+            <div class="max-w-[900px] mx-auto flex flex-col gap-10 md:w-full">
+               <section
+                  class="w-full min-h-fit bg-snowWhite px-10 py-10 flex flex-col gap-8 border-[3px] border-ebonyBlack rounded-md shadow-base bg"
+                  id="generate-key-section">
+                  <div class="flex flex-col gap-5">
+                     <h2 class="text-mainAccent text-3xl font-extrabold">
+                        Generate RSA Key Pair
+                     </h2>
+                     <div class="flex flex-col gap-1.5">
+                        <label class="text-lg font-bold w-fit" for="rsa-key-size">Select RSA key size</label>
+                        <select
+                           class="text-lg border-2 border-ebonyBlack px-3 py-3 rounded-base bg-snowWhite hover:border-mainAccent focus:border-mainAccent transition-all duration-300 ease-in-out"
+                           name="rsa-key-size" id="rsa-key-size">
+                           <option class="px-3 py-3" disabled selected>
+                              Choose key pair size
+                           </option>
+                           <option class="px-3 py-3" value="192">192 bit</option>
+                           <option class="px-3 py-3" value="256">256 bit</option>
+                           <option class="px-3 py-3" value="512">512 bit</option>
+                           <option class="px-3 py-3" value="1024">1024 bit</option>
+                        </select>
+                     </div>
+                     <div>
+                        <button
+                           class="bg-mainAccent px-4 py-2 text-lg font-bold border-2 border-ebonyBlack rounded-base shadow-base hover:translate-x-[5px] hover:translate-y-[5px] hover:shadow-none transition-all duration-300 ease-in-out cursor-pointer"
+                           type="button" id="generate-key-pair-btn">
+                           Generate Key
+                        </button>
+                     </div>
+                  </div>
+                  <div class="opacity-0 hidden grid-cols-2 gap-10 transition-all duration-300 ease-in-out"
+                     id="generate-key-result-wrapper">
+                     <div class="flex flex-col gap-1.5" id="public-key">
+                        <h3 class="text-2xl font-bold">Public Key</h3>
+                        <textarea
+                           class="w-full min-h-[150px] bg-snowWhite border-2 border-ebonyBlack px-3 py-2 rounded-[5px] resize-none scroll-auto text-lg hover:border-mainAccent focus:border-mainAccent transition-all duration-300 ease-in-out"
+                           id="public-key-value"></textarea>
+                     </div>
+                     <div class="flex flex-col gap-1.5" id="private-key">
+                        <h3 class="text-2xl font-bold">Private Key</h3>
+                        <textarea
+                           class="w-full min-h-[150px] bg-snowWhite border-2 border-ebonyBlack px-3 py-2 rounded-[5px] resize-none scroll-auto text-lg hover:border-mainAccent focus:border-mainAccent transition-all duration-300 ease-in-out"
+                           id="private-key-value"></textarea>
+                     </div>
+                  </div>
+               </section>
+               <div class="flex flex-row gap-10 flex-wrap md:flex-nowrap" id="encryption-decryption-section">
+                  <section
+                     class="w-full h-fit bg-snowWhite px-10 py-10 flex flex-col border-[3px] border-ebonyBlack rounded-md shadow-base bg">
+                     <div class="flex flex-col gap-5">
+                        <h2 class="text-mainAccent text-3xl font-extrabold">
+                           RSA Encryption
+                        </h2>
+                        <div class="flex flex-col gap-1.5">
+                           <h3 class="text-lg font-bold">Enter plain text</h3>
+                           <textarea
+                              class="w-full min-h-[150px] bg-snowWhite border-2 border-ebonyBlack px-3 py-2 rounded-[5px] resize-none scroll-auto text-lg hover:border-mainAccent focus:border-mainAccent transition-all duration-300 ease-in-out"
+                              id="plaintext-encrypt-data"></textarea>
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                           <h3 class="text-lg font-bold">Enter public key</h3>
+                           <textarea
+                              class="w-full min-h-[150px] bg-snowWhite border-2 border-ebonyBlack px-3 py-2 rounded-[5px] resize-none scroll-auto text-lg hover:border-mainAccent focus:border-mainAccent transition-all duration-300 ease-in-out"
+                              id="plaintext-encrypt-key" pattern="[0-9]+"></textarea>
+                        </div>
+                        <div>
+                           <button
+                              class="bg-mainAccent px-4 py-2 text-lg font-bold border-2 border-ebonyBlack rounded-base shadow-base hover:translate-x-[5px] hover:translate-y-[5px] hover:shadow-none transition-all duration-300 ease-in-out cursor-pointer"
+                              type="button" id="plaintext-encrypt-button">
+                              Encrypt
+                           </button>
+                        </div>
+                        <div class="opacity-0 hidden transition-all duration-300 ease-in-out flex-col gap-1.5"
+                           id="plaintext-encrypt-result-wrapper">
+                           <h3 class="text-lg font-bold">Encrypted Result</h3>
+                           <textarea
+                              class="w-full min-h-[150px] bg-snowWhite border-2 border-ebonyBlack px-3 py-2 rounded-[5px] resize-none scroll-auto text-lg hover:border-mainAccent focus:border-mainAccent transition-all duration-300 ease-in-out"
+                              id="plaintext-encrypt-result"></textarea>
+                        </div>
+                     </div>
+                  </section>
+                  <section
+                     class="w-full h-fit bg-snowWhite px-10 py-10 flex flex-col border-[3px] border-ebonyBlack rounded-md shadow-base bg">
+                     <div class="flex flex-col gap-5">
+                        <h2 class="text-mainAccent text-3xl font-extrabold">
+                           RSA Decryption
+                        </h2>
+                        <div class="flex flex-col gap-1.5">
+                           <h3 class="text-lg font-bold">Enter encrypted text</h3>
+                           <textarea
+                              class="w-full min-h-[150px] bg-snowWhite border-2 border-ebonyBlack px-3 py-2 rounded-[5px] resize-none scroll-auto text-lg hover:border-mainAccent focus:border-mainAccent transition-all duration-300 ease-in-out"
+                              id="encrypt-plaintext-data"></textarea>
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                           <h3 class="text-lg font-bold">Enter private key</h3>
+                           <textarea
+                              class="w-full min-h-[150px] bg-snowWhite border-2 border-ebonyBlack px-3 py-2 rounded-[5px] resize-none scroll-auto text-lg hover:border-mainAccent focus:border-mainAccent transition-all duration-300 ease-in-out"
+                              id="encrypt-plaintext-key" pattern="[0-9]+"></textarea>
+                        </div>
+                        <div>
+                           <button
+                              class="bg-mainAccent px-4 py-2 text-lg font-bold border-2 border-ebonyBlack rounded-base shadow-base hover:translate-x-[5px] hover:translate-y-[5px] hover:shadow-none transition-all duration-300 ease-in-out cursor-pointer"
+                              type="button" id="encrypt-plaintext-button">
+                              Decrypt
+                           </button>
+                        </div>
+                        <div class="opacity-0 hidden transition-all duration-300 ease-in-out flex-col gap-1.5"
+                           id="encrypt-plaintext-result-wrapper">
+                           <h3 class="text-lg font-bold">Decrypted Result</h3>
+                           <textarea
+                              class="w-full min-h-[150px] bg-snowWhite border-2 border-ebonyBlack px-3 py-2 rounded-[5px] resize-none scroll-auto text-lg hover:border-mainAccent focus:border-mainAccent transition-all duration-300 ease-in-out"
+                              id="encrypt-plaintext-result"></textarea>
+                        </div>
+                     </div>
+                  </section>
+               </div>
+            </div>
+         </main>
+         <footer
+            class="w-full min-h-[80px] bg-snowWhite border-t-[3px] border-ebonyBlack flex items-center justify-center">
+            <p class="font-bold text-xl">2024 © Ridwan Muhammad Raihan</p>
+         </footer>
+      </div>
+      <div class="fixed w-fit min-h-fit right-5 bottom-5 z-50 flex flex-col gap-7" id="helper">
+         <a class="flex justify-center items-center w-16 h-16 border-[3px] border-ebonyBlack rounded-[5px] bg-snowWhite shadow-base"
+            href="#generate-key-section" title="Generate Key">
+            <img class="w-[70%]" src="./assets/img/key.png" alt="Key Logo">
+         </a>
+         <a class="flex justify-center items-center w-16 h-16 border-[3px] border-ebonyBlack rounded-[5px] bg-snowWhite shadow-base"
+            href="#encryption-decryption-section" title="Encrypt & Decrypt">
+            <img class="w-[70%]" src="./assets/img/encryption.png" alt=" Encryption Logo">
+         </a>
+      </div>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/big-integer/1.6.52/BigInteger.js"
+         integrity="sha512-1Qxy25oCaKJX0zc1cZFdCBR+JYbWZe9MaX+PB+w10qnfItWEJghI5oETGoVqED0D2Vv/mbTsVWi6JqoCmEkOpA=="
+         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="./assets/js/main.js">
+      </script>
+   </body>
+
+</html>
