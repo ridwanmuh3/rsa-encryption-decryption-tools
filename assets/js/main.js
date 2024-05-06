@@ -99,12 +99,12 @@ const regex = /[0-9]+/
 
 window.addEventListener('DOMContentLoaded', () => {
 	generateKeyPairButton.addEventListener('click', () => {
-		resultKeyWrapper.classList.remove('hidden')
-		resultKeyWrapper.classList.add('grid')
-
 		const keySize = Number(document.getElementById('rsa-key-size').value)
 
 		if (keySize) {
+			resultKeyWrapper.classList.remove('hidden')
+			resultKeyWrapper.classList.add('grid')
+
 			const { e, n, d } = RSA.generate(keySize)
 			publicKey = e
 			privateKey = d
